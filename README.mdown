@@ -35,7 +35,7 @@ Requirements
 Submitting bugs and feature requests
 ------------------------------------
 
-PPlease send bugs to me via
+Please send bugs to me via
 [GitHub](https://github.com/mullanaphy/unhelper/issues)
 
 Author
