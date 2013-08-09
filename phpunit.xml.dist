@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit colors="true" verbose="true" bootstrap="tests/bootstrap.php">
+    <testsuites>
+        <testsuite name="PHY\Unhelper Test Suite">
+            <directory phpVersion="5.4" phpVersionOperator=">=">tests/Unhelper/</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">src/Unhelper/</directory>
+        </whitelist>
+    </filter>
+</phpunit>

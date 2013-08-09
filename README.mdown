@@ -1,0 +1,61 @@
+PHY\Unhelper - Unhelpful methods and classes for PHP 5.4+
+================================================================================
+
+
+PHY\Unhelper is a small library who's only job is to do absolutely nothing of
+value. Feel free to use it in your servers just don't expect it to do anything
+except mess things up for you. Enjoy!
+
+Usage
+-----
+
+```php
+<?php
+
+use PHY\Unhelper\Utility;
+
+/*
+ * If the local server's day is Monday, this static call will throw an
+ * exception.
+ */
+Utility::throwExceptionIfTodayIsMondy();
+```
+
+
+About
+-----
+
+Sometimes I like to help people, other times I like to make things like this.
+
+Requirements
+------------
+
+- PHP 5.4+
+
+Submitting bugs and feature requests
+------------------------------------
+
+PPlease send bugs to me via
+[GitHub](https://github.com/mullanaphy/unhelper/issues)
+
+Author
+------
+
+John Mullanaphy - <john@jo.mu> - <http://jo.mu/>
+That's it for now...
+
+License
+-------
+
+PHY\Unhelper is licensed under the DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE -
+see the `LICENSE` file for details
+
+Acknowledgements
+----------------
+
+Nobody in particular.
+
+TODO
+----
+
+Find more useless functions and algorithms to add. Add tests as well.

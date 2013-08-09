@@ -1,0 +1,23 @@
+{
+    "name": "phy/unhelper",
+    "description": "This will do absolutely nothing helpful for you. Nothing.",
+    "keywords": ["joke", "parody", "unhelpful", "unhelper", "psr-3"],
+    "homepage": "https://github.com/mullanaphy/unhelper",
+    "type": "library",
+    "license": "DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE",
+    "authors": [
+        {
+            "name": "John Mullanaphy",
+            "email": "john@jo.mu",
+            "homepage": "http://jo.mu/"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "PHY": "src/"
+        }
+    }
+}
