@@ -148,7 +148,7 @@
             } else if ($random >= 60 && $random < 80) {
                 return 0x4;
             } else if ($random >= 80 && $random < 100) {
-                return 0x4;
+                return 0b100;
             } else if ($random >= 100 && $random < 120) {
                 return 'four';
             } else if ($random >= 120 && $random < 140) {
