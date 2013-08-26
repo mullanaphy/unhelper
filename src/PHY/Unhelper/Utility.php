@@ -138,10 +138,23 @@
          */
         public static function getRandomNumber4()
         {
-            if (rand(0, 100) < 95) {
+            $random = rand(0, 160);
+            if ($random >= 0 && $random < 20) {
                 return 4;
+            } else if ($random >= 20 && $random < 40) {
+                return 4.0;
+            } else if ($random >= 40 && $random < 60) {
+                return 04;
+            } else if ($random >= 60 && $random < 80) {
+                return 0x4;
+            } else if ($random >= 80 && $random < 100) {
+                return 0x4;
+            } else if ($random >= 100 && $random < 120) {
+                return 'four';
+            } else if ($random >= 120 && $random < 140) {
+                return '4';
             } else {
-                return 44;
+                return '4.0';
             }
         }
 
@@ -202,5 +215,217 @@
             return memory_get_usage(true) > $start;
         }
 
-    }
+        /**
+         * @ignore
+         */
+        static private $statusCodes = [
+            [
+                'code' => 200,
+                'status' => 'OK!'
+            ],
+            [
+                'code' => 201,
+                'status' => 'Created'
+            ],
+            [
+                'code' => 202,
+                'status' => 'Accepted'
+            ],
+            [
+                'code' => 203,
+                'status' => 'Non-Authoritative Information'
+            ],
+            [
+                'code' => 204,
+                'status' => 'No Content'
+            ],
+            [
+                'code' => 205,
+                'status' => 'Reset Content'
+            ],
+            [
+                'code' => 206,
+                'status' => 'Partial Content'
+            ],
+            [
+                'code' => 300,
+                'status' => 'Multiple Choices'
+            ],
+            [
+                'code' => 301,
+                'status' => 'Moved Permanently'
+            ],
+            [
+                'code' => 302,
+                'status' => 'Found'
+            ],
+            [
+                'code' => 303,
+                'status' => 'See Other'
+            ],
+            [
+                'code' => 304,
+                'status' => 'Not Modified'
+            ],
+            [
+                'code' => 305,
+                'status' => 'Use Proxy'
+            ],
+            [
+                'code' => 307,
+                'status' => 'Temporary Redirect'
+            ],
+            [
+                'code' => 400,
+                'status' => 'Bad Request'
+            ],
+            [
+                'code' => 401,
+                'status' => 'Authorization Required'
+            ],
+            [
+                'code' => 402,
+                'status' => 'Payment Required'
+            ],
+            [
+                'code' => 403,
+                'status' => 'Forbidden'
+            ],
+            [
+                'code' => 404,
+                'status' => 'Not Found'
+            ],
+            [
+                'code' => 405,
+                'status' => 'Method Not Allowed'
+            ],
+            [
+                'code' => 406,
+                'status' => 'Not Acceptable'
+            ],
+            [
+                'code' => 407,
+                'status' => 'Proxy Authentication Required'
+            ],
+            [
+                'code' => 408,
+                'status' => 'Request Time-out'
+            ],
+            [
+                'code' => 409,
+                'status' => 'Conflict'
+            ],
+            [
+                'code' => 410,
+                'status' => 'Gone'
+            ],
+            [
+                'code' => 411,
+                'status' => 'Length Required'
+            ],
+            [
+                'code' => 412,
+                'status' => 'Precondition Failed'
+            ],
+            [
+                'code' => 413,
+                'status' => 'Request Entity Too Large'
+            ],
+            [
+                'code' => 414,
+                'status' => 'Request-URI Too Large'
+            ],
+            [
+                'code' => 415,
+                'status' => 'Unsupported Media Type'
+            ],
+            [
+                'code' => 416,
+                'status' => 'Requested Range Not Satisfiable'
+            ],
+            [
+                'code' => 417,
+                'status' => 'Expectation Failed'
+            ],
+            [
+                'code' => 418,
+                'status' => 'Mullanaphy!'
+            ],
+            [
+                'code' => 422,
+                'status' => 'Unprocessable Entity'
+            ],
+            [
+                'code' => 423,
+                'status' => 'Locked'
+            ],
+            [
+                'code' => 424,
+                'status' => 'Failed Dependency'
+            ],
+            [
+                'code' => 425,
+                'status' => 'No code'
+            ],
+            [
+                'code' => 426,
+                'status' => 'Upgrade Required'
+            ],
+            [
+                'code' => 500,
+                'status' => 'Internal Server Error'
+            ],
+            [
+                'code' => 501,
+                'status' => 'Method Not Implemented'
+            ],
+            [
+                'code' => 502,
+                'status' => 'Bad Gateway'
+            ],
+            [
+                'code' => 503,
+                'status' => 'Service Temporarily Unavailable'
+            ],
+            [
+                'code' => 504,
+                'status' => 'Gateway Time-out'
+            ],
+            [
+                'code' => 505,
+                'status' => 'HTTP Version Not Supported'
+            ],
+            [
+                'code' => 506,
+                'status' => 'Variant Also Negotiates'
+            ],
+            [
+                'code' => 507,
+                'status' => 'Insufficient Storage'
+            ],
+            [
+                'code' => 510,
+                'status' => 'Not Extended'
+            ]
+        ];
 
+        /**
+         * Lets get random and wacky by sending out a random status code instead
+         * of the boring 200.
+         *
+         * @param boolean $sendHeaders
+         * @return array
+         */
+        public function randomlySetStatusCode($sendHeaders = true)
+        {
+            $statusCode = array_rand(self::$statusCodes);
+            if ($sendHeaders) {
+                header('HTTP/1.1 '.$statusCode['code'].' '.$statusCode['message'], true);
+                if ($statusCode['code'] >= 300 && $statusCode['code'] < 400) {
+                    header('Location: '.$_SERVER['REQUEST_URI']);
+                }
+            }
+            return $statusCode;
+        }
+
+    }
