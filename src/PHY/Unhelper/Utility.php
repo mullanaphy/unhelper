@@ -131,9 +131,10 @@
         }
 
         /**
-         * Randomly generate a number 4. Sometimes it's 44.
+         * Randomly generate a number 4 of various types. Mostly just int,
+         * sometimes a string or double.
          *
-         * @return int
+         * @return mixed
          * @static
          */
         public static function getRandomNumber4()
