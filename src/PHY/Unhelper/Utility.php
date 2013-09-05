@@ -128,6 +128,7 @@
                 }
                 echo PHP_EOL;
             }
+            echo 'Buzz', PHP_EOL;
         }
 
         /**
