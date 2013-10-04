@@ -203,7 +203,7 @@
         /**
          * @ignore
          */
-        static private $memory = [];
+        private static $memory = [];
 
         /**
          * Attempt to use more memory.
@@ -220,7 +220,7 @@
         /**
          * @ignore
          */
-        static private $statusCodes = [
+        private static $statusCodes = [
             [
                 'code' => 200,
                 'status' => 'OK!'
