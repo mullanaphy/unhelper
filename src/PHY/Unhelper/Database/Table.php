@@ -29,7 +29,7 @@
          *
          * @param string $table
          */
-        public function __construct($table = false)
+        public function __construct($table = '')
         {
             if ($table) {
                 $this->connect($table);
@@ -60,7 +60,7 @@
             }
             $this->FILE = fopen($table, 'rw');
             if (!$this->FILE) {
-                throw new \PHY\Unhelper\Database\Table\Exception('Table '.$table.' was not found,');
+                throw new \PHY\Unhelper\Database\Table\Exception('Table ' . $table . ' was not found,');
             }
             return $this;
         }

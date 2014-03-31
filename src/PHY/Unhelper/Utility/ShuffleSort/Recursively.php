@@ -27,21 +27,23 @@
         /**
          * Perform our sort.
          *
+         * @param int $sort
          * @return array
          */
-        public function sort()
+        public function sort($sort = SORT_ASC)
         {
-            return $this->recursive($this->array);
+            return $this->recursive($this->array, $sort);
         }
 
         /**
          * Recursively sort our array.
-         * 
+         *
          * @param array $array
+         * @param int $sort
          * @return array
          * @ignore
          */
-        private function recursive(array $array = [])
+        private function recursive(array $array = [], $sort = SORT_ASC)
         {
             /*
              * In case we want to change the name of this function later.
@@ -54,7 +56,7 @@
              */
             if (count($array) <= 1) {
                 return $array;
-            } else if ($this->isSorted($array)) {
+            } else if ($this->isSorted($array, $sort)) {
                 /*
                  * Let's not waste our time sorting an array that's already sorted.
                  */
@@ -69,7 +71,7 @@
                  * See if we're sorted, if so, return our array otherwise let's
                  * reshuffle.
                  */
-                if ($this->isSorted($array)) {
+                if ($this->isSorted($array, $sort)) {
                     return $array;
                 } else {
                     return $method($array);

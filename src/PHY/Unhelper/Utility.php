@@ -11,6 +11,8 @@
 
     namespace PHY\Unhelper;
 
+    use PHY\Unhelper\Utility\Exception;
+
     /**
      * Utility class with many very unhelpful functions. Super duper fast fizz
      * buzz though!
@@ -34,23 +36,6 @@
             if (date('w') === 5 && date('H') > 17) {
                 die('Time to go.');
             }
-        }
-
-        /**
-         * Use this simple encryption method for securing things. More steps, more
-         * secure.
-         *
-         * @param type $string String we'll be encrypting.
-         * @param int $steps How many steps we should rot13 with.
-         * @return string
-         * @static
-         */
-        public static function encryptStringWithRot13($string, $steps = 2)
-        {
-            for ($i = 0; $i < $steps; ++$i) {
-                $string = str_rot13($string);
-            }
-            return $string;
         }
 
         /**
@@ -131,50 +116,6 @@
         }
 
         /**
-         * Randomly generate a number 4. Sometimes it's 44.
-         *
-         * @return int
-         * @static
-         */
-        public static function getRandomNumber4()
-        {
-            $random = rand(0, 160);
-            if ($random >= 0 && $random < 20) {
-                return 4;
-            } else if ($random >= 20 && $random < 40) {
-                return 4.0;
-            } else if ($random >= 40 && $random < 60) {
-                return 04;
-            } else if ($random >= 60 && $random < 80) {
-                return 0x4;
-            } else if ($random >= 80 && $random < 100) {
-                return 0b100;
-            } else if ($random >= 100 && $random < 120) {
-                return 'four';
-            } else if ($random >= 120 && $random < 140) {
-                return '4';
-            } else {
-                return '4.0';
-            }
-        }
-
-        /**
-         * See if a scalar is equal to one.
-         *
-         * @param scalar $number
-         * @return boolean
-         * @throws \PHY\Unhelper\Utility\Exception
-         * @static
-         */
-        public static function isNumberOne($number)
-        {
-            if (!is_scalar($number)) {
-                throw new \PHY\Unhelper\Utility\Exception('isNumberOne was expecting a scalar, which was not provided... thanks...');
-            }
-            return 'one' === strtolower($number) || 1 === $number || 1.0 === $number;
-        }
-
-        /**
          * Kill a page by hitting nested recursive. More fan than exit.
          *
          * @static
@@ -188,13 +129,13 @@
          * Throws an exception if today is Monday.
          * "Sounds like someone has the case of the Mondays"
          *
-         * @throws \PHY\Unhelper\Utility\Exception
+         * @throws Utility\Exception
          * @static
          */
         public static function throwExceptionIfTodayIsMonday()
         {
             if (1 === date('w')) {
-                throw new \PHY\Unhelper\Utility\Exception('Yup, today is Monday.');
+                throw new Utility\Exception('Yup, today is Monday.');
             }
         }
 
@@ -207,6 +148,7 @@
          * Attempt to use more memory.
          *
          * @return boolean
+         * @static
          */
         public static function useMoreMemory()
         {
@@ -415,17 +357,72 @@
          *
          * @param boolean $sendHeaders
          * @return array
+         * @static
          */
-        public function randomlySetStatusCode($sendHeaders = true)
+        public static function randomlySetStatusCode($sendHeaders = true)
         {
             $statusCode = array_rand(self::$statusCodes);
             if ($sendHeaders) {
-                header('HTTP/1.1 '.$statusCode['code'].' '.$statusCode['message'], true);
+                header('HTTP/1.1 ' . $statusCode['code'] . ' ' . $statusCode['message'], true);
                 if ($statusCode['code'] >= 300 && $statusCode['code'] < 400) {
-                    header('Location: '.$_SERVER['REQUEST_URI']);
+                    header('Location: ' . $_SERVER['REQUEST_URI']);
                 }
             }
             return $statusCode;
         }
 
+        /**
+         * We want to randomly create a breaking change to our code base. This will either rename a class, a method, or
+         * change the visibility of a class property or method.
+         */
+        public static function makeBreakingChange()
+        {
+            $FILE = fopen('', 'r+');
+            while ($line = fgets($FILE)) {
+                switch (rand(0, 2)) {
+                    case 0:
+                        $file = preg_replace('#(public)[.*]+function\([.*]+\){#', 'private', $file);
+                        break;
+                    case 1:
+
+                        break;
+                    default:
+
+                }
+            }
+        }
+
+        /**
+         * Check to see if a store has some sweet eggs, if so buy more milk than
+         * originally planned.
+         *
+         * @param Store $store
+         * @return Store
+         */
+        public static function buyMilkFromStore(Store $store)
+        {
+            if ($store->has('eggs')) {
+                $store->add(new Store\Product('milk', 6));
+            } else {
+                $store->add(new Store\Product('milk'));
+            }
+            return $store;
+        }
+
+        /**
+         * While we're out, get some milk.
+         *
+         * @param boolean $out
+         * @return Store
+         */
+        public static function buyMilkWhileOut($out = false)
+        {
+            $store = new Store('General Store');
+            $milk = new Store\Product('milk');
+            $store->add($milk);
+            while ($out) {
+                $milk->increment();
+            }
+            return $store;
+        }
     }

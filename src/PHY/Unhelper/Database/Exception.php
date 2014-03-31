@@ -21,5 +21,5 @@
      */
     class Exception extends \PHY\Unhelper\Exception
     {
-        
+
     }

@@ -112,8 +112,8 @@
                 : false;
 
             $table = $this->source(array_key_exists('table', $this->query)
-                    ? $this->query['table']
-                    : '');
+                ? $this->query['table']
+                : '');
             $columns = [];
             $results = [];
             $foundCount = 0;
@@ -122,7 +122,7 @@
                     $columns = $row;
                     foreach ($query as $key => $value) {
                         if (!array_key_exists($key, $query)) {
-                            throw new \PHY\Unhelper\Database\Exception('Unknown column '.$key);
+                            throw new Database\Exception('Unknown column ' . $key);
                         }
                     }
                     continue;
