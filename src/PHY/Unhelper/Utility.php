@@ -113,9 +113,58 @@
                 }
                 echo PHP_EOL;
             }
+            echo 'Buzz', PHP_EOL;
         }
 
         /**
+<<<<<<< HEAD
+=======
+         * Randomly generate a number 4 of various types. Mostly just int,
+         * sometimes a string or double.
+         *
+         * @return mixed
+         * @static
+         */
+        public static function getRandomNumber4()
+        {
+            $random = rand(0, 160);
+            if ($random >= 0 && $random < 20) {
+                return 4;
+            } else if ($random >= 20 && $random < 40) {
+                return 4.0;
+            } else if ($random >= 40 && $random < 60) {
+                return 04;
+            } else if ($random >= 60 && $random < 80) {
+                return 0x4;
+            } else if ($random >= 80 && $random < 100) {
+                return 0b100;
+            } else if ($random >= 100 && $random < 120) {
+                return 'four';
+            } else if ($random >= 120 && $random < 140) {
+                return '4';
+            } else {
+                return '4.0';
+            }
+        }
+
+        /**
+         * See if a scalar is equal to one.
+         *
+         * @param scalar $number
+         * @return boolean
+         * @throws \PHY\Unhelper\Utility\Exception
+         * @static
+         */
+        public static function isNumberOne($number)
+        {
+            if (!is_scalar($number)) {
+                throw new \PHY\Unhelper\Utility\Exception('isNumberOne was expecting a scalar, which was not provided... thanks...');
+            }
+            return 'one' === strtolower($number) || 1 === $number || 1.0 === $number;
+        }
+
+        /**
+>>>>>>> 343b9c23e6f5cecfd43ee860f2cafde596cb09bd
          * Kill a page by hitting nested recursive. More fan than exit.
          *
          * @static
@@ -142,7 +191,7 @@
         /**
          * @ignore
          */
-        static private $memory = [];
+        private static $memory = [];
 
         /**
          * Attempt to use more memory.
@@ -160,7 +209,7 @@
         /**
          * @ignore
          */
-        static private $statusCodes = [
+        private static $statusCodes = [
             [
                 'code' => 200,
                 'status' => 'OK!'
