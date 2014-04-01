@@ -117,54 +117,6 @@
         }
 
         /**
-<<<<<<< HEAD
-=======
-         * Randomly generate a number 4 of various types. Mostly just int,
-         * sometimes a string or double.
-         *
-         * @return mixed
-         * @static
-         */
-        public static function getRandomNumber4()
-        {
-            $random = rand(0, 160);
-            if ($random >= 0 && $random < 20) {
-                return 4;
-            } else if ($random >= 20 && $random < 40) {
-                return 4.0;
-            } else if ($random >= 40 && $random < 60) {
-                return 04;
-            } else if ($random >= 60 && $random < 80) {
-                return 0x4;
-            } else if ($random >= 80 && $random < 100) {
-                return 0b100;
-            } else if ($random >= 100 && $random < 120) {
-                return 'four';
-            } else if ($random >= 120 && $random < 140) {
-                return '4';
-            } else {
-                return '4.0';
-            }
-        }
-
-        /**
-         * See if a scalar is equal to one.
-         *
-         * @param scalar $number
-         * @return boolean
-         * @throws \PHY\Unhelper\Utility\Exception
-         * @static
-         */
-        public static function isNumberOne($number)
-        {
-            if (!is_scalar($number)) {
-                throw new \PHY\Unhelper\Utility\Exception('isNumberOne was expecting a scalar, which was not provided... thanks...');
-            }
-            return 'one' === strtolower($number) || 1 === $number || 1.0 === $number;
-        }
-
-        /**
->>>>>>> 343b9c23e6f5cecfd43ee860f2cafde596cb09bd
          * Kill a page by hitting nested recursive. More fan than exit.
          *
          * @static
@@ -404,6 +356,8 @@
          * Lets get random and wacky by sending out a random status code instead
          * of the boring 200.
          *
+         * This method is perfect for setting up RESTLess APIs.
+         *
          * @param boolean $sendHeaders
          * @return array
          * @static
@@ -426,14 +380,21 @@
          */
         public static function makeBreakingChange()
         {
-            $FILE = fopen('', 'r+');
+            $files = glob('..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '*.php');
+            $FILE = fopen($files[rand(0, count($files) - 1)], 'r+');
+            $rand = rand(0, 3);
+            $sorter = new Utility\ShuffleSort;
             while ($line = fgets($FILE)) {
-                switch (rand(0, 2)) {
-                    case 0:
+                switch ($rand) {
+                    case 1:
                         $file = preg_replace('#(public)[.*]+function\([.*]+\){#', 'private', $file);
                         break;
-                    case 1:
-
+                    case 2:
+                        $file = preg_replace_callback('#[public|private|protected][.*]+function\([.*]+\){#', function ($name) use ($sorter) {
+                            return implode('', $sorter->set(explode('', $name))->sort(rand(0, 1)
+                                ? 'asc'
+                                : 'desc'));
+                        }, $file);
                         break;
                     default:
 

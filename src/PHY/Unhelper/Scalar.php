@@ -29,7 +29,7 @@
          * Use this simple encryption method for securing things. More steps, more
          * secure.
          *
-         * @param type $string String we'll be encrypting.
+         * @param string $string String we'll be encrypting.
          * @param int $steps How many steps we should rot13 with.
          * @return string
          * @static
