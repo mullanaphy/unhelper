@@ -96,14 +96,20 @@
         }
 
         /**
-         * See if a given scalar is true.
+         * See if a given scalar is true (based on the capitalization of the method call).
+         *
+         * E.g.
+         *
+         * Scalar::isTrue('True'), Scalar::isTRUE('TRUE'), Scalar::istrue('true'); are all true,
+         * Scalar::isTrue('true') is false and so on.
          *
          * @param bool $boolean
          * @return bool
          */
         public static function isTrue($boolean)
         {
-            return $boolean === 'true';
+            $func = __FUNCTION__;
+            return $boolean === str_replace('is', '', $func);
         }
 
         /**
