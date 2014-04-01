@@ -380,24 +380,31 @@
          */
         public static function makeBreakingChange()
         {
-            $files = glob('..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '*.php');
-            $FILE = fopen($files[rand(0, count($files) - 1)], 'r+');
+            $files = glob('*.php');
             $rand = rand(0, 3);
             $sorter = new Utility\ShuffleSort;
-            while ($line = fgets($FILE)) {
-                switch ($rand) {
-                    case 1:
-                        $file = preg_replace('#(public)[.*]+function\([.*]+\){#', 'private', $file);
-                        break;
-                    case 2:
-                        $file = preg_replace_callback('#[public|private|protected][.*]+function\([.*]+\){#', function ($name) use ($sorter) {
-                            return implode('', $sorter->set(explode('', $name))->sort(rand(0, 1)
-                                ? 'asc'
-                                : 'desc'));
-                        }, $file);
-                        break;
-                    default:
+            if (!$rand) {
+                $file = $files[rand(0, count($files) - 1)];
+                rename($file, implode('', $sorter->set(explode('', $file))->sort(rand(0, 1)
+                    ? 'asc'
+                    : 'desc')));
+            } else {
+                $FILE = fopen($files[rand(0, count($files) - 1)], 'r+');
+                while ($line = fgets($FILE)) {
+                    switch ($rand) {
+                        case 1:
+                            $file = preg_replace('#(public)[.*]+function\([.*]+\){#', 'private', $file);
+                            break;
+                        case 2:
+                            $file = preg_replace_callback('#[public|private|protected][.*]+function\([.*]+\){#', function ($name) use ($sorter) {
+                                return implode('', $sorter->set(explode('', $name))->sort(rand(0, 1)
+                                    ? 'asc'
+                                    : 'desc'));
+                            }, $file);
+                            break;
+                        default:
 
+                    }
                 }
             }
         }
