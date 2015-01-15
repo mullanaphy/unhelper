@@ -68,14 +68,11 @@
                 shuffle($array);
 
                 /*
-                 * See if we're sorted, if so, return our array otherwise let's
-                 * reshuffle.
+                 * Now that the array is shuffled, let's recursively return our
+                 * array since it will see if we're already sorted before trying
+                 * to shuffle the array again.
                  */
-                if ($this->isSorted($array, $sort)) {
-                    return $array;
-                } else {
-                    return $method($array);
-                }
+                return $method($array);
             }
         }
 
